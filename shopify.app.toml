@@ -1,0 +1,42 @@
+# Learn more about configuring your app at https://shopify.dev/docs/apps/tools/cli/configuration
+
+client_id = "928e7406d863aa5f54d20d7d2906ae0a"
+application_url = "https://d358-208-127-57-19.ngrok-free.app"
+embedded = true
+name = "B2B Leads PoC"
+handle = "b2b-leads-poc"
+
+[webhooks]
+api_version = "2025-01"
+
+  [[webhooks.subscriptions]]
+  topics = [ "app/uninstalled" ]
+  uri = "/webhooks/app/uninstalled"
+
+  [[webhooks.subscriptions]]
+  topics = [ "app/scopes_update" ]
+  uri = "/webhooks/app/scopes_update"
+
+[access_scopes]
+# Learn more at https://shopify.dev/docs/apps/tools/cli/configuration#access_scopes
+scopes = "write_products,write_pixels,read_customer_events"
+
+[auth]
+redirect_urls = [
+  "https://d358-208-127-57-19.ngrok-free.app/auth/callback",
+  "https://d358-208-127-57-19.ngrok-free.app/auth/shopify/callback",
+  "https://d358-208-127-57-19.ngrok-free.app/api/auth/callback"
+]
+
+[app_proxy]
+url = "https://d358-208-127-57-19.ngrok-free.app/proxy"
+subpath = "b2b-leads-poc"
+prefix = "apps"
+
+[pos]
+embedded = false
+
+[build]
+dev_store_url = "b2b-leads-poc.myshopify.com"
+automatically_update_urls_on_dev = true
+include_config_on_deploy = true
