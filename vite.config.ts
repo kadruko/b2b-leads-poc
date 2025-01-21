@@ -1,5 +1,6 @@
 import { vitePlugin as remix } from "@remix-run/dev";
 import { installGlobals } from "@remix-run/node";
+import fs from "fs";
 import { defineConfig, type UserConfig } from "vite";
 import tsconfigPaths from "vite-tsconfig-paths";
 
@@ -45,11 +46,11 @@ export default defineConfig({
       // See https://vitejs.dev/config/server-options.html#server-fs-allow for more information
       allow: ["app", "node_modules"],
     },
-    // https: {
-    //   key: fs.readFileSync('./key.pem'),
-    //   cert: fs.readFileSync('./cert.pem'),
-    // },
-    // proxy: {}
+    https: {
+      key: fs.readFileSync('./key.pem'),
+      cert: fs.readFileSync('./cert.pem'),
+    },
+    proxy: {}
   },
   plugins: [
     remix({

@@ -1,7 +1,7 @@
 # Learn more about configuring your app at https://shopify.dev/docs/apps/tools/cli/configuration
 
 client_id = "928e7406d863aa5f54d20d7d2906ae0a"
-application_url = "https://d358-208-127-57-19.ngrok-free.app"
+application_url = "https://easily-mongolia-goals-production.trycloudflare.com"
 embedded = true
 name = "B2B Leads PoC"
 handle = "b2b-leads-poc"
@@ -23,15 +23,10 @@ scopes = "write_products,write_pixels,read_customer_events"
 
 [auth]
 redirect_urls = [
-  "https://d358-208-127-57-19.ngrok-free.app/auth/callback",
-  "https://d358-208-127-57-19.ngrok-free.app/auth/shopify/callback",
-  "https://d358-208-127-57-19.ngrok-free.app/api/auth/callback"
+  "https://easily-mongolia-goals-production.trycloudflare.com/auth/callback",
+  "https://easily-mongolia-goals-production.trycloudflare.com/auth/shopify/callback",
+  "https://easily-mongolia-goals-production.trycloudflare.com/api/auth/callback"
 ]
-
-[app_proxy]
-url = "https://d358-208-127-57-19.ngrok-free.app/proxy"
-subpath = "b2b-leads-poc"
-prefix = "apps"
 
 [pos]
 embedded = false

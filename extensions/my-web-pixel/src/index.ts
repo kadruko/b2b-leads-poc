@@ -8,14 +8,7 @@ register(({ analytics, browser, init, settings }) => {
     analytics.subscribe('page_viewed', (event) => {
       console.log('Page viewed', event);
 
-      const url = '/apps/b2b-leads-poc';
-      // fetch(url, {
-      //   method: 'POST',
-      //   headers: {
-      //     'Content-Type': 'application/json',
-      //   },
-      //   body: JSON.stringify(event)
-      // });
+      const url = 'https://localhost:3000/events';
       axios.post(url, event, {
         headers: {
           'Content-Type': 'application/json',
