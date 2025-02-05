@@ -48,6 +48,9 @@ jobs:
         run: shopify app config use ${{ inputs.environment }}
       - name: Deploy Shopify app
         run: shopify app deploy --force
+        env:
+          SHOPIFY_API_KEY: ${{ secrets.SHOPIFY_API_KEY }}
+          SHOPIFY_API_SECRET: ${{ secrets.SHOPIFY_API_SECRET }}
       - name: Deploy using SSH
         uses: appleboy/ssh-action@v0.1.4
         with:
