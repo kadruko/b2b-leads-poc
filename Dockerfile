@@ -14,8 +14,6 @@ COPY package.json package-lock.json* ./
 
 RUN npm ci --omit=dev && npm cache clean --force
 
-RUN shopify app config use ${NODE_ENV}
-
 # Remove CLI packages since we don't need them in production by default.
 # Remove this line if you want to run CLI commands in your container.
 RUN npm remove @shopify/cli
