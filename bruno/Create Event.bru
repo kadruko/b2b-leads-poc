@@ -1,0 +1,17 @@
+meta {
+  name: Create Event
+  type: http
+  seq: 2
+}
+
+post {
+  url: http://89.58.29.139:3030/events
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "test": "1234"
+  }
+}

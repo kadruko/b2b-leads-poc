@@ -1,0 +1,9 @@
+{
+  "version": "1",
+  "name": "B2B Leads",
+  "type": "collection",
+  "ignore": [
+    "node_modules",
+    ".git"
+  ]
+}
