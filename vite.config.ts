@@ -1,8 +1,8 @@
-import { vitePlugin as remix } from "@remix-run/dev";
-import { installGlobals } from "@remix-run/node";
-import fs from "fs";
-import { defineConfig, type UserConfig } from "vite";
-import tsconfigPaths from "vite-tsconfig-paths";
+import { vitePlugin as remix } from '@remix-run/dev';
+import { installGlobals } from '@remix-run/node';
+import fs from 'fs';
+import { defineConfig, type UserConfig } from 'vite';
+import tsconfigPaths from 'vite-tsconfig-paths';
 
 installGlobals({ nativeFetch: true });
 
@@ -18,20 +18,20 @@ if (
   delete process.env.HOST;
 }
 
-const host = new URL(process.env.SHOPIFY_APP_URL || "http://localhost")
+const host = new URL(process.env.SHOPIFY_APP_URL || 'http://localhost')
   .hostname;
 
 let hmrConfig;
-if (host === "localhost") {
+if (host === 'localhost') {
   hmrConfig = {
-    protocol: "ws",
-    host: "localhost",
+    protocol: 'ws',
+    host: 'localhost',
     port: 64999,
     clientPort: 64999,
   };
 } else {
   hmrConfig = {
-    protocol: "wss",
+    protocol: 'wss',
     host: host,
     port: parseInt(process.env.FRONTEND_PORT!) || 8002,
     clientPort: 443,
@@ -44,17 +44,20 @@ export default defineConfig({
     hmr: hmrConfig,
     fs: {
       // See https://vitejs.dev/config/server-options.html#server-fs-allow for more information
-      allow: ["app", "node_modules"],
+      allow: ['app', 'node_modules'],
     },
-    https: {
-      key: fs.readFileSync('./key.pem'),
-      cert: fs.readFileSync('./cert.pem'),
-    },
-    proxy: {}
+    https:
+      process.env.NODE_ENV === 'development'
+        ? {
+            key: fs.readFileSync('./key.pem'),
+            cert: fs.readFileSync('./cert.pem'),
+          }
+        : undefined,
+    proxy: {},
   },
   plugins: [
     remix({
-      ignoredRouteFiles: ["**/.*"],
+      ignoredRouteFiles: ['**/.*'],
       future: {
         v3_fetcherPersist: true,
         v3_relativeSplatPath: true,
