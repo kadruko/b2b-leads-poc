@@ -1,0 +1,10 @@
+name: shopify-b2b-leads-${NODE_ENV}
+services:
+  web:
+    build: .
+    ports:
+      - ${PORT}:3000
+    restart: always
+    environment:
+      - NODE_ENV=${NODE_ENV}
+      - PORT=3000
