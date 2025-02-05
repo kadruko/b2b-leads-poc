@@ -4,7 +4,7 @@ client_id = "928e7406d863aa5f54d20d7d2906ae0a"
 application_url = "https://shopify-b2b-leads.glowsoft.de"
 embedded = true
 name = "B2B Leads"
-handle = "b2b-leads"
+handle = "b2b-leads-poc"
 
 [webhooks]
 api_version = "2025-01"
