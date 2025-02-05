@@ -12,3 +12,7 @@ services:
     environment:
       - NODE_ENV=${NODE_ENV}
       - PORT=3000
+      - SHOPIFY_APP_URL=${SHOPIFY_APP_URL}
+      - SHOPIFY_API_KEY=${SHOPIFY_API_KEY}
+      - SHOPIFY_MY_WEB_PIXEL_ID=${SHOPIFY_MY_WEB_PIXEL_ID}
+      - SCOPES=${SCOPES}
