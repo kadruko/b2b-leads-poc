@@ -1,15 +1,21 @@
 FROM node:18-alpine
+
+ARG NODE_ENV
+
 RUN apk add --no-cache openssl
 
 EXPOSE 3000
 
 WORKDIR /app
 
-# ENV NODE_ENV=production
+ENV NODE_ENV=${NODE_ENV}
 
 COPY package.json package-lock.json* ./
 
 RUN npm ci --omit=dev && npm cache clean --force
+
+RUN shopify app config use ${NODE_ENV}
+
 # Remove CLI packages since we don't need them in production by default.
 # Remove this line if you want to run CLI commands in your container.
 RUN npm remove @shopify/cli

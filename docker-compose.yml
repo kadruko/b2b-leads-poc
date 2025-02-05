@@ -1,7 +1,11 @@
 name: shopify-b2b-leads-${NODE_ENV}
 services:
   web:
-    build: .
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        - NODE_ENV=${NODE_ENV}
     ports:
       - ${PORT}:3000
     restart: always
