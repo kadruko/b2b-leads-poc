@@ -89,19 +89,24 @@ export default function Index() {
           <Layout.Section>
             <Card>
               <Text as="h2" variant="headingMd">
-                Table
+                Events by Customer
               </Text>
             </Card>
           </Layout.Section>
           <Layout.Section variant="oneThird">
             {webPixelExists ? (
               <Card>
-                <InlineGrid columns="1fr auto">
-                  <Text as="h2" variant="headingMd">
-                    Customer Event Tracking
+                <BlockStack gap="200">
+                  <InlineGrid columns="1fr auto">
+                    <Text as="h2" variant="headingMd">
+                      Customer Event Tracking
+                    </Text>
+                    <Badge tone="success">Active</Badge>
+                  </InlineGrid>
+                  <Text variant="bodyMd" as="p">
+                    Web Pixel ID: {webPixel.id}
                   </Text>
-                  <Badge tone="success">Active</Badge>
-                </InlineGrid>
+                </BlockStack>
               </Card>
             ) : (
               <Card>
