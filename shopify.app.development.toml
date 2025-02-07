@@ -1,7 +1,7 @@
 # Learn more about configuring your app at https://shopify.dev/docs/apps/tools/cli/configuration
 
 client_id = "928e7406d863aa5f54d20d7d2906ae0a"
-application_url = "https://localhost:3000"
+application_url = "https://permission-proceeding-higher-voting.trycloudflare.com"
 embedded = true
 name = "B2B Leads Development"
 handle = "b2b-leads-development"
@@ -23,9 +23,9 @@ scopes = "write_products,write_pixels,read_customer_events"
 
 [auth]
 redirect_urls = [
-  "https://localhost:3000/auth/callback",
-  "https://localhost:3000/auth/shopify/callback",
-  "https://localhost:3000/api/auth/callback"
+  "https://permission-proceeding-higher-voting.trycloudflare.com/auth/callback",
+  "https://permission-proceeding-higher-voting.trycloudflare.com/auth/shopify/callback",
+  "https://permission-proceeding-higher-voting.trycloudflare.com/api/auth/callback"
 ]
 
 [pos]
