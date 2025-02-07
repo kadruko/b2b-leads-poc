@@ -1,10 +1,10 @@
 # Learn more about configuring your app at https://shopify.dev/docs/apps/tools/cli/configuration
 
-client_id = "928e7406d863aa5f54d20d7d2906ae0a"
+client_id = "557899d6cfece8282f869e9c39f08403"
 application_url = "https://shopify-b2b-leads.glowsoft.de"
 embedded = true
 name = "B2B Leads"
-handle = "b2b-leads-poc"
+handle = "b2b-leads"
 
 [webhooks]
 api_version = "2025-01"
@@ -30,8 +30,3 @@ redirect_urls = [
 
 [pos]
 embedded = false
-
-[build]
-dev_store_url = "b2b-leads-poc.myshopify.com"
-automatically_update_urls_on_dev = true
-include_config_on_deploy = true
