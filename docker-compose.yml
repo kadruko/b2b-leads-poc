@@ -19,6 +19,7 @@ services:
       - SCOPES=${SCOPES}
       - SHOPIFY_MY_WEB_PIXEL_ID=${SHOPIFY_MY_WEB_PIXEL_ID}
   db:
+    hostname: db
     image: postgres
     ports:
       - ${DATABASE_PORT}:5432
