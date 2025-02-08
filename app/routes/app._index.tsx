@@ -28,7 +28,6 @@ export const loader = async ({ request }: LoaderFunctionArgs) => {
       query {
         webPixel {
           id
-          settings
         }
       }
     `,
@@ -45,14 +44,11 @@ export const loader = async ({ request }: LoaderFunctionArgs) => {
 export const action = async ({ request }: ActionFunctionArgs) => {
   const { admin } = await authenticate.admin(request);
 
-  // const settings = JSON.stringify({ accountID: '123' });
-  // console.log('settings', settings);
   const response = await admin.graphql(
     `#graphql
       mutation createWebPixel($settings: JSON!) {
         webPixelCreate(webPixel: {settings: $settings}) {
           webPixel {
-            settings
             id
           }
         }
@@ -61,7 +57,7 @@ export const action = async ({ request }: ActionFunctionArgs) => {
     {
       variables: {
         settings: {
-          accountID: '123',
+          apiURL: process.env.SHOPIFY_APP_URL,
         },
       },
     },
