@@ -5,13 +5,80 @@ meta {
 }
 
 post {
-  url: https://shopify-b2b-leads.glowsoft.de/events
+  url: {{baseUrl}}/events
   body: json
   auth: none
 }
 
+headers {
+  X-Forwarded-For: {{ipAddress}}
+}
+
 body:json {
   {
-    "test": "1234"
+    "id": "sh-e6ae67b5-5F73-430A-D037-AB6F017A1385",
+    "name": "page_viewed",
+    "data": {},
+    "type": "standard",
+    "timestamp": "2025-02-08T17:49:36.319Z",
+    "context": {
+      "document": {
+        "location": {
+          "href": "https://b2b-leads-poc.myshopify.com/products/the-multi-managed-snowboard",
+          "hash": "",
+          "host": "b2b-leads-poc.myshopify.com",
+          "hostname": "b2b-leads-poc.myshopify.com",
+          "origin": "https://b2b-leads-poc.myshopify.com",
+          "pathname": "/products/the-multi-managed-snowboard",
+          "port": "",
+          "protocol": "https:",
+          "search": ""
+        },
+        "referrer": "https://b2b-leads-poc.myshopify.com/",
+        "characterSet": "UTF-8",
+        "title": "The Multi-managed Snowboard – b2b-leads-poc"
+      },
+      "navigator": {
+        "language": "de-DE",
+        "cookieEnabled": true,
+        "languages": [
+          "de-DE",
+          "de",
+          "en-US",
+          "en"
+        ],
+        "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36"
+      },
+      "window": {
+        "innerHeight": 695,
+        "innerWidth": 898,
+        "outerHeight": 816,
+        "outerWidth": 1536,
+        "pageXOffset": 0,
+        "pageYOffset": 0,
+        "location": {
+          "href": "https://b2b-leads-poc.myshopify.com/products/the-multi-managed-snowboard",
+          "hash": "",
+          "host": "b2b-leads-poc.myshopify.com",
+          "hostname": "b2b-leads-poc.myshopify.com",
+          "origin": "https://b2b-leads-poc.myshopify.com",
+          "pathname": "/products/the-multi-managed-snowboard",
+          "port": "",
+          "protocol": "https:",
+          "search": ""
+        },
+        "origin": "https://b2b-leads-poc.myshopify.com",
+        "screen": {
+          "height": 864,
+          "width": 1536
+        },
+        "screenX": 0,
+        "screenY": 0,
+        "scrollX": 0,
+        "scrollY": 0
+      }
+    },
+    "seq": 1,
+    "clientId": "021c6a47-ea71-4510-9309-9afbfddea271"
   }
 }

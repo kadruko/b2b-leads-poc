@@ -31,3 +31,27 @@ model Session {
   collaborator  Boolean?  @default(false)
   emailVerified Boolean?  @default(false)
 }
+
+model Organization {
+  id String @id @default(uuid())
+  as String @unique
+  name String
+
+  events Event[]
+}
+
+model Event {
+  id String @id @default(uuid())
+  shop String
+  shopifyId String @unique
+  name String
+  type String
+  timestamp DateTime
+  clientId String
+  documentUrl String // Event context
+  userLanguage String // Event context
+  userAgent String // Event context
+
+  organizationId String
+  organization Organization @relation(fields: [organizationId], references: [id])
+}
