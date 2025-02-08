@@ -26,3 +26,4 @@ database.sqlite
 *.pem
 
 shopify.app.toml
+data
