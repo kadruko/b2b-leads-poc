@@ -39,7 +39,7 @@ export const loader = async ({ request }: LoaderFunctionArgs) => {
     console.error('Error getting webPixel:', error);
   }
 
-  return Response.json({ webPixel });
+  return { webPixel };
 };
 
 export const action = async ({ request }: ActionFunctionArgs) => {
@@ -69,7 +69,7 @@ export const action = async ({ request }: ActionFunctionArgs) => {
   const json = await response.json();
   const webPixel = json.data.webPixel;
 
-  return Response.json({ webPixel });
+  return { webPixel };
 };
 
 export default function Index() {
