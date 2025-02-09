@@ -85,7 +85,7 @@ export default function Index() {
           <Layout.Section>
             <Card>
               <Text as="h2" variant="headingMd">
-                Events by Customer
+                Leads Overview
               </Text>
             </Card>
           </Layout.Section>
@@ -95,7 +95,7 @@ export default function Index() {
                 <BlockStack gap="200">
                   <InlineGrid columns="1fr auto">
                     <Text as="h2" variant="headingMd">
-                      Customer Event Tracking
+                      Lead Event Tracking
                     </Text>
                     <Badge tone="success">Active</Badge>
                   </InlineGrid>
@@ -108,11 +108,11 @@ export default function Index() {
               <Card>
                 <BlockStack gap="400">
                   <Text as="h2" variant="headingMd">
-                    Enable Customer Event Tracking
+                    Enable Lead Event Tracking
                   </Text>
                   <Text variant="bodyMd" as="p">
-                    Before you can start tracking customer events, you need to
-                    configure and enable the responsible Web Pixel.
+                    Before you can start tracking events of possible customers,
+                    you need to configure and enable the responsible Web Pixel.
                   </Text>
                   <InlineStack align="end">
                     <ButtonGroup>
