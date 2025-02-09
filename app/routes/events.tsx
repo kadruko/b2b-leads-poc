@@ -1,4 +1,5 @@
-import { ActionFunctionArgs } from '@remix-run/node';
+import { ActionFunctionArgs, LoaderFunctionArgs } from '@remix-run/node';
+import { cors } from 'remix-utils/cors';
 import { getClientIPAddress } from 'remix-utils/get-client-ip-address';
 import { eventMapper } from '../.server/event/event.mapper';
 import { eventService } from '../.server/event/event.service';
@@ -8,14 +9,16 @@ import { WebPixelEvent } from '../.server/shopify/web-pixel-event';
 
 const RESPONSE_HEADERS = {
   'Content-Type': 'application/json',
-  'Access-Control-Allow-Origin': '*', // Required for CORS support to work
 };
 
-export function loader() {
-  return new Response(null, {
-    status: 200,
-    headers: RESPONSE_HEADERS,
-  });
+export async function loader({ request }: LoaderFunctionArgs) {
+  return await cors(
+    request,
+    new Response(null, {
+      status: 200,
+      headers: RESPONSE_HEADERS,
+    }),
+  );
 }
 
 export const action = async ({
@@ -45,8 +48,11 @@ export const action = async ({
     await eventService.create(event);
   }
 
-  return new Response(null, {
-    status: 202,
-    headers: RESPONSE_HEADERS,
-  });
+  return await cors(
+    request,
+    new Response(null, {
+      status: 202,
+      headers: RESPONSE_HEADERS,
+    }),
+  );
 };
