@@ -34,9 +34,10 @@ export const action = async ({
   }
 
   return new Response(null, {
-    status: 201,
+    status: 202,
     headers: {
       'Content-Type': 'application/json',
+      'Access-Control-Allow-Origin': '*',
     },
   });
 };
