@@ -45,7 +45,7 @@ jobs:
       - name: Setup Shopify CLI
         run: npm install -g @shopify/cli@latest
       - name: Deploy Shopify app
-        run: shopify app deploy -f -c ${{ inputs.environment }} --source-control-url "$COMMIT_URL"
+        run: shopify app deploy -f -c ${{ inputs.environment }} --source-control-url "$COMMIT_URL --reset"
         env:
           SHOPIFY_API_KEY: ${{ secrets.SHOPIFY_API_KEY }}
           SHOPIFY_CLI_PARTNERS_TOKEN: ${{ secrets.SHOPIFY_CLI_PARTNERS_TOKEN }}
