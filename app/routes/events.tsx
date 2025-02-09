@@ -11,22 +11,17 @@ const RESPONSE_HEADERS = {
   'Content-Type': 'application/json',
 };
 
-const CORS_OPTIONS = {
-  origin: '*',
-  methods: ['GET', 'HEAD', 'PUT', 'PATCH', 'POST', 'DELETE', 'OPTIONS'],
-  allowedHeaders: ['Content-Type'],
-  exposedHeaders: ['Content-Type'],
-  maxAge: 86400,
-};
-
 export async function loader({ request }: LoaderFunctionArgs) {
+  if (request.method === 'OPTIONS') {
+    return await cors(request, new Response(null));
+  }
+
   return await cors(
     request,
     new Response(null, {
       status: 200,
       headers: RESPONSE_HEADERS,
     }),
-    CORS_OPTIONS,
   );
 }
 
@@ -63,6 +58,5 @@ export const action = async ({
       status: 202,
       headers: RESPONSE_HEADERS,
     }),
-    CORS_OPTIONS,
   );
 };
