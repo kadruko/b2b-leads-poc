@@ -26,7 +26,12 @@ class IpLookupService {
       'reverse',
     ];
     const lang = IpLookupLocalization.ENGLISH;
-    return await ipLookupApi.get<IpInfoDto>(path, fields, lang);
+    const dto = await ipLookupApi.get<IpInfoDto>(path, fields, lang);
+    const ipInfo: IpInfo = {
+      ...dto,
+      as: dto.as.split(' ')[0],
+    };
+    return ipInfo;
   }
 }
 

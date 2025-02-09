@@ -1,13 +1,13 @@
-import { Event } from '@prisma/client';
 import { WebPixelEvent } from '../shopify/web-pixel-event';
+import { CreateEvent } from './event';
 
 class EventMapper {
   fromWebPixelEvent(
     shop: string,
     organizationId: string,
     { clientId, context, data, id, name, seq, timestamp, type }: WebPixelEvent,
-  ) {
-    const event: Omit<Event, 'id'> = {
+  ): CreateEvent {
+    const event: CreateEvent = {
       shop,
       organizationId,
       shopifyId: id,
@@ -22,3 +22,5 @@ class EventMapper {
     return event;
   }
 }
+
+export const eventMapper = new EventMapper();

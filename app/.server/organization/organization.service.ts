@@ -11,6 +11,31 @@ class OrganizationService {
     return organization;
   }
 
+  public async upsert(as: string, name: string) {
+    const organization = await prisma.organization.upsert({
+      where: {
+        as,
+      },
+      update: {
+        name,
+      },
+      create: {
+        as,
+        name,
+      },
+    });
+    return organization;
+  }
+
+  public async find(as: string) {
+    const organization = await prisma.organization.findFirst({
+      where: {
+        as,
+      },
+    });
+    return organization;
+  }
+
   public async exists(as: string) {
     const count = await prisma.organization.count({
       where: {
