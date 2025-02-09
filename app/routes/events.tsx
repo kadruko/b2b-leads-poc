@@ -6,6 +6,18 @@ import { ipLookupService } from '../.server/ip-lookup/ip-lookup.service';
 import { organizationService } from '../.server/organization/organization.service';
 import { WebPixelEvent } from '../.server/shopify/web-pixel-event';
 
+const RESPONSE_HEADERS = {
+  'Content-Type': 'application/json',
+  'Access-Control-Allow-Origin': '*', // Required for CORS support to work
+};
+
+export function loader() {
+  return new Response(null, {
+    status: 200,
+    headers: RESPONSE_HEADERS,
+  });
+}
+
 export const action = async ({
   request,
 }: ActionFunctionArgs & {
@@ -35,9 +47,6 @@ export const action = async ({
 
   return new Response(null, {
     status: 202,
-    headers: {
-      'Content-Type': 'application/json',
-      'Access-Control-Allow-Origin': '*',
-    },
+    headers: RESPONSE_HEADERS,
   });
 };
