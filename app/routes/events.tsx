@@ -2,6 +2,7 @@ import { ActionFunctionArgs } from '@remix-run/node';
 import { getClientIPAddress } from 'remix-utils/get-client-ip-address';
 import { eventMapper } from '../.server/event/event.mapper';
 import { eventService } from '../.server/event/event.service';
+import { eventValidator } from '../.server/event/event.validator';
 import { ipLookupService } from '../.server/ip-lookup/ip-lookup.service';
 import { organizationService } from '../.server/organization/organization.service';
 import { WebPixelEvent } from '../.server/shopify/web-pixel-event';
@@ -23,11 +24,20 @@ export function loader() {
   });
 }
 
-export const action = async ({
-  request,
-}: ActionFunctionArgs & {
-  request: { socket: any };
-}) => {
+export const action = async ({ request }: ActionFunctionArgs) => {
+  processRequest(request);
+
+  return new Response(null, {
+    status: 202,
+    headers: RESPONSE_HEADERS,
+  });
+};
+
+const processRequest = async (request: Request) => {
+  const body = await request.text();
+  const webPixelEvent: WebPixelEvent = JSON.parse(body);
+  eventValidator.validateWebPixelEvent(webPixelEvent);
+
   const ipAddress = getClientIPAddress(request);
   console.log('CLIENT_IP', ipAddress);
   if (ipAddress) {
@@ -39,8 +49,6 @@ export const action = async ({
       ipInfo.org,
     );
 
-    const body = await request.text();
-    const webPixelEvent: WebPixelEvent = JSON.parse(body);
     const shop = webPixelEvent.context.document.location.hostname;
     const event = eventMapper.fromWebPixelEvent(
       shop,
@@ -49,9 +57,4 @@ export const action = async ({
     );
     await eventService.create(event);
   }
-
-  return new Response(null, {
-    status: 202,
-    headers: RESPONSE_HEADERS,
-  });
 };

@@ -43,15 +43,20 @@ model Organization {
 model Event {
   id String @id @default(uuid())
   shop String
+
+  // Event metadata
   shopifyId String @unique
   name String
   type String
   timestamp DateTime
   clientId String
+
+  // Event context
   documentUrl String // Event context
   userLanguage String // Event context
   userAgent String // Event context
 
+  // Organization
   organizationId String
-  organization Organization @relation(fields: [organizationId], references: [id])
+  organization Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
 }

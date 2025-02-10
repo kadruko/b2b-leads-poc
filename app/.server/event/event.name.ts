@@ -1,0 +1,17 @@
+export enum EventName {
+  ALERT_DISPLAYED = 'alert_displayed',
+  CART_VIEWED = 'cart_viewed',
+  CHECKOUT_ADDRESS_INFO_SUBMITTED = 'checkout_address_info_submitted',
+  CHECKOUT_COMPLETED = 'checkout_completed',
+  CHECKOUT_CONTACT_INFO_SUBMITTED = 'checkout_contact_info_submitted',
+  CHECKOUT_SHIPPING_INFO_SUBMITTED = 'checkout_shipping_info_submitted',
+  CHECKOUT_STARTED = 'checkout_started',
+  COLLECTION_VIEWED = 'collection_viewed',
+  PAGE_VIEWED = 'page_viewed',
+  PAYMENT_INFO_SUBMITTED = 'payment_info_submitted',
+  PRODUCT_ADDED_TO_CART = 'product_added_to_cart',
+  PRODUCT_REMOVED_FROM_CART = 'product_removed_from_cart',
+  PRODUCT_VIEWED = 'product_viewed',
+  SEARCH_SUBMITTED = 'search_submitted',
+  UI_EXTENSION_ERRORED = 'ui_extension_errored',
+}
