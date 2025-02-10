@@ -34,13 +34,17 @@ export const action = async ({ request }: ActionFunctionArgs) => {
 };
 
 const processRequest = async (request: Request) => {
-  const body = await request.text();
-  const webPixelEvent: WebPixelEvent = JSON.parse(body);
-  eventValidator.validateWebPixelEvent(webPixelEvent);
+  try {
+    const body = await request.text();
+    const webPixelEvent: WebPixelEvent = JSON.parse(body);
+    eventValidator.validateWebPixelEvent(webPixelEvent);
 
-  const ipAddress = getClientIPAddress(request);
-  console.log('CLIENT_IP', ipAddress);
-  if (ipAddress) {
+    const ipAddress = getClientIPAddress(request);
+    console.log('CLIENT_IP', ipAddress);
+    if (!ipAddress) {
+      throw new Error('Failed to determine client IP address');
+    }
+
     const ipInfo = await ipLookupService.lookup(ipAddress);
     console.log(ipInfo);
 
@@ -56,5 +60,7 @@ const processRequest = async (request: Request) => {
       webPixelEvent,
     );
     await eventService.create(event);
+  } catch (error) {
+    console.error(error);
   }
 };
