@@ -1,9 +1,10 @@
 import { ActionFunctionArgs } from '@remix-run/node';
-import { getClientIPAddress } from 'remix-utils/get-client-ip-address';
 import { eventMapper } from '../.server/event/event.mapper';
 import { eventService } from '../.server/event/event.service';
 import { eventValidator } from '../.server/event/event.validator';
 import { ipLookupService } from '../.server/ip-lookup/ip-lookup.service';
+import { ipService } from '../.server/ip/ip.service';
+import { ipValidator } from '../.server/ip/ip.validator';
 import { organizationService } from '../.server/organization/organization.service';
 import { WebPixelEvent } from '../.server/shopify/web-pixel-event';
 
@@ -35,32 +36,28 @@ export const action = async ({ request }: ActionFunctionArgs) => {
 
 const processRequest = async (request: Request) => {
   try {
-    const body = await request.text();
-    const webPixelEvent: WebPixelEvent = JSON.parse(body);
-    eventValidator.validateWebPixelEvent(webPixelEvent);
-
-    const ipAddress = getClientIPAddress(request);
-    console.log('CLIENT_IP', ipAddress);
-    if (!ipAddress) {
-      throw new Error('Failed to determine client IP address');
-    }
-
-    const ipInfo = await ipLookupService.lookup(ipAddress);
-    console.log(ipInfo);
-
-    const organization = await organizationService.upsert(
-      ipInfo.as,
-      ipInfo.org,
-    );
-
-    const shop = webPixelEvent.context.document.location.hostname;
-    const event = eventMapper.fromWebPixelEvent(
-      shop,
-      organization.id,
-      webPixelEvent,
-    );
-    await eventService.create(event);
+    createEventFromRequest(request);
   } catch (error) {
-    console.error(error);
+    console.warn(error);
   }
+};
+
+const createEventFromRequest = async (request: Request) => {
+  const body = await request.text();
+  const webPixelEvent: WebPixelEvent = JSON.parse(body);
+  eventValidator.validateWebPixelEvent(webPixelEvent);
+
+  const ipAddress = await ipService.fromRequest(request);
+  const ipInfo = await ipLookupService.lookup(ipAddress);
+  await ipValidator.validate(ipInfo);
+
+  const organization = await organizationService.upsert(ipInfo.as, ipInfo.org);
+
+  const shop = webPixelEvent.context.document.location.hostname;
+  const event = eventMapper.fromWebPixelEvent(
+    shop,
+    organization.id,
+    webPixelEvent,
+  );
+  await eventService.create(event);
 };
