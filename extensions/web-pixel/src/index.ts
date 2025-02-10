@@ -1,17 +1,9 @@
 import { register } from '@shopify/web-pixels-extension';
-import axios from 'axios';
+import { eventService } from './event.service';
+import { Settings } from './settings';
 
-register(({ analytics, browser, init, settings }) => {
-  // Sample subscribe to page view
-  analytics.subscribe('page_viewed', (event) => {
-    console.log('Page viewed', event);
-
-    const baseUrl = settings.apiURL;
-    const url = `${baseUrl}/events`;
-    axios.post(url, event, {
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    });
+register(({ analytics, settings }) => {
+  analytics.subscribe('all_standard_events', (event) => {
+    eventService.create(settings as Settings, event);
   });
 });
