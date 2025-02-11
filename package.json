@@ -17,7 +17,7 @@
     "prisma": "prisma",
     "graphql-codegen": "graphql-codegen",
     "vite": "vite",
-    "cert": "mkcert -key-file key.pem -cert-file cert.pem localhost"
+    "script:mock-data": "tsx ./scripts/mock-data/main.ts"
   },
   "type": "module",
   "engines": {
@@ -60,6 +60,7 @@
     "eslint": "^8.42.0",
     "eslint-config-prettier": "^9.1.0",
     "prettier": "^3.2.4",
+    "tsx": "4.19.2",
     "typescript": "^5.2.2",
     "vite": "^5.1.3"
   },
