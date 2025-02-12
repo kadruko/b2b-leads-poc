@@ -1,6 +1,6 @@
+import { EventName } from '../../.common/event/event.name';
+import { EventType } from '../../.common/event/event.type';
 import { WebPixelEvent } from '../shopify/web-pixel-event';
-import { EventName } from './event.name';
-import { EventType } from './event.type';
 
 class EventValidator {
   public static ALLOWED_EVENT_TYPES = [EventType.STANDARD];

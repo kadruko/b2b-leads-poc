@@ -1,6 +1,6 @@
 import { Event } from '@prisma/client';
-import { EventName } from '../../app/.server/event/event.name';
-import { EventType } from '../../app/.server/event/event.type';
+import { EventName } from '../../app/.common/event/event.name';
+import { EventType } from '../../app/.common/event/event.type';
 import {
   MOCK_ORGANIZATION_SAP_SE,
   MOCK_ORGANIZATION_UBER,

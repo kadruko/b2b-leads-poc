@@ -4,15 +4,24 @@ import {
   IndexTable,
   useIndexResourceState,
 } from '@shopify/polaris';
-import { EventListItem } from '../../.server/event/event';
+import { EventListItem } from '../../.common/event/event';
+import { EVENT_PAGE_SIZE } from '../../.common/event/event.constants';
 
 interface EventTableProps {
   events: EventListItem[];
   count: number;
+  page: number;
   session: Session;
+  navToPage: (page: number) => void;
 }
 
-export function EventTable({ events, count, session }: EventTableProps) {
+export function EventTable({
+  events,
+  count,
+  page,
+  session,
+  navToPage,
+}: EventTableProps) {
   const { selectedResources, allResourcesSelected, handleSelectionChange } =
     useIndexResourceState(events);
   const locale = session.locale || DEFAULT_LOCALE;
@@ -23,6 +32,8 @@ export function EventTable({ events, count, session }: EventTableProps) {
     hour: '2-digit',
     minute: '2-digit',
   });
+  const hasNext = page * EVENT_PAGE_SIZE < count;
+  const hasPrevious = page > 1;
 
   return (
     <IndexTable
@@ -40,6 +51,16 @@ export function EventTable({ events, count, session }: EventTableProps) {
         { title: 'Event' },
         { title: 'Date' },
       ]}
+      pagination={{
+        hasNext,
+        hasPrevious,
+        onNext: () => {
+          navToPage(page + 1);
+        },
+        onPrevious: () => {
+          navToPage(page - 1);
+        },
+      }}
     >
       {events.map(({ id, name, timestamp, organization }, index) => (
         <IndexTable.Row
