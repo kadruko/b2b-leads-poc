@@ -27,16 +27,6 @@ class OrganizationService {
     return organization;
   }
 
-  public async findManyByIds(ids: string[]) {
-    return await prisma.organization.findMany({
-      where: {
-        id: {
-          in: ids,
-        },
-      },
-    });
-  }
-
   public async find(as: string) {
     const organization = await prisma.organization.findFirst({
       where: {

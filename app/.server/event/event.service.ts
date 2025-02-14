@@ -1,7 +1,6 @@
 import { Organization } from '@prisma/client';
 import { CreateEvent } from '../../.common/event/event';
 import prisma from '../../db.server';
-import { organizationService } from '../organization/organization.service';
 import { EventQuery } from './event.query';
 
 class EventService {
@@ -36,11 +35,10 @@ class EventService {
   public async findOrganizations(shop: string): Promise<Organization[]> {
     const events = await prisma.event.findMany({
       distinct: ['organizationId'],
+      include: { organization: true },
       where: { shop },
     });
-    const organizationIds = events.map((event) => event.organizationId);
-    const organizations =
-      await organizationService.findManyByIds(organizationIds);
+    const organizations = events.map(({ organization }) => organization);
     return organizations;
   }
 
