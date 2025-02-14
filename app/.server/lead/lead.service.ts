@@ -3,8 +3,8 @@ import { Lead } from '../../.common/lead/lead';
 import prisma from '../../db.server';
 
 class LeadService {
-  public async findMany(): Promise<Lead[]> {
-    const result = await prisma.$queryRawTyped(findManyLeads());
+  public async findMany(shop: string): Promise<Lead[]> {
+    const result = await prisma.$queryRawTyped(findManyLeads(shop));
     const leads: Lead[] = result.map((lead) => {
       let leadScore = 0;
       if (lead.leadScore) {
