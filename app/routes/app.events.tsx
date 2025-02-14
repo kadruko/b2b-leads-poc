@@ -1,32 +1,22 @@
-import { LoaderFunctionArgs } from '@remix-run/node';
 import { useLoaderData, useSearchParams } from '@remix-run/react';
 import { TitleBar } from '@shopify/app-bridge-react';
 import { Card, Layout, Page } from '@shopify/polaris';
 import { EventTable } from '../.client/event/event.table';
-import { EVENT_PAGE_SIZE } from '../.common/event/event.constants';
-import { DEFAULT_PAGE, SEARCH_PARAM_PAGE } from '../.common/search.params';
-import { eventService } from '../.server/event/event.service';
-import { authenticate } from '../shopify.server';
+import {
+  DEFAULT_PAGE,
+  SEARCH_PARAM_ORGANIZATION,
+  SEARCH_PARAM_PAGE,
+} from '../.common/search.params';
+import { EventLoader } from '../.server/event/event.loader';
 
-export const loader = async ({ request }: LoaderFunctionArgs) => {
-  const { session } = await authenticate.admin(request);
-
-  const searchParams = new URL(request.url).searchParams;
-  const page = Number(searchParams.get(SEARCH_PARAM_PAGE)) || DEFAULT_PAGE;
-  const offset = (page - 1) * EVENT_PAGE_SIZE;
-  const events = await eventService.findMany(session.shop, {
-    limit: EVENT_PAGE_SIZE,
-    offset,
-  });
-  const count = await eventService.count(session.shop);
-
-  return { events, count, session };
-};
+export const loader = EventLoader;
 
 export default function EventPage() {
-  const { session, events, count } = useLoaderData<typeof loader>();
+  const { events, count, session, organizations } =
+    useLoaderData<typeof loader>();
   const [searchParams, setSearchParams] = useSearchParams();
   const page = Number(searchParams.get(SEARCH_PARAM_PAGE)) || DEFAULT_PAGE;
+  const organizationIds = searchParams.getAll(SEARCH_PARAM_ORGANIZATION);
 
   return (
     <Page>
@@ -40,7 +30,18 @@ export default function EventPage() {
               page={page}
               session={session as any}
               navToPage={(page) => {
-                setSearchParams({ ...searchParams, page: page.toString() });
+                searchParams.set(SEARCH_PARAM_PAGE, page.toString());
+                setSearchParams(searchParams);
+              }}
+              organizations={organizations}
+              organizationFilter={organizationIds}
+              setOrganizationFilter={(organizationIds) => {
+                searchParams.delete(SEARCH_PARAM_PAGE);
+                searchParams.delete(SEARCH_PARAM_ORGANIZATION);
+                organizationIds.forEach((id) =>
+                  searchParams.append(SEARCH_PARAM_ORGANIZATION, id),
+                );
+                setSearchParams(searchParams);
               }}
             />
           </Card>

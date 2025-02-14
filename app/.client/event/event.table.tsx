@@ -1,4 +1,4 @@
-import { Session } from '@prisma/client';
+import { Organization, Session } from '@prisma/client';
 import {
   DEFAULT_LOCALE,
   IndexTable,
@@ -6,21 +6,28 @@ import {
 } from '@shopify/polaris';
 import { EventListItem } from '../../.common/event/event';
 import { EVENT_PAGE_SIZE } from '../../.common/event/event.constants';
+import { EventFilter } from './event.filter';
 
 interface EventTableProps {
   events: EventListItem[];
   count: number;
-  page: number;
   session: Session;
+  page: number;
   navToPage: (page: number) => void;
+  organizations: Organization[];
+  organizationFilter: string[];
+  setOrganizationFilter: (organizationIds: string[]) => void;
 }
 
 export function EventTable({
   events,
   count,
-  page,
   session,
+  page,
   navToPage,
+  organizations,
+  organizationFilter,
+  setOrganizationFilter,
 }: EventTableProps) {
   const { selectedResources, allResourcesSelected, handleSelectionChange } =
     useIndexResourceState(events);
@@ -36,46 +43,57 @@ export function EventTable({
   const hasPrevious = page > 1;
 
   return (
-    <IndexTable
-      resourceName={{
-        singular: 'Event',
-        plural: 'Events',
-      }}
-      itemCount={count}
-      selectedItemsCount={
-        allResourcesSelected ? 'All' : selectedResources.length
-      }
-      onSelectionChange={handleSelectionChange}
-      headings={[
-        { title: 'Organization' },
-        { title: 'Event' },
-        { title: 'Date' },
-      ]}
-      pagination={{
-        hasNext,
-        hasPrevious,
-        onNext: () => {
-          navToPage(page + 1);
-        },
-        onPrevious: () => {
-          navToPage(page - 1);
-        },
-      }}
-    >
-      {events.map(({ id, name, timestamp, organization }, index) => (
-        <IndexTable.Row
-          id={id}
-          key={id}
-          selected={selectedResources.includes(id)}
-          position={index}
-        >
-          <IndexTable.Cell>{organization.name}</IndexTable.Cell>
-          <IndexTable.Cell>{name}</IndexTable.Cell>
-          <IndexTable.Cell>
-            {timestampFormat.format(new Date(timestamp))}
-          </IndexTable.Cell>
-        </IndexTable.Row>
-      ))}
-    </IndexTable>
+    <>
+      <EventFilter
+        filter={{
+          organization: organizationFilter,
+        }}
+        onFilter={({ organization }) => {
+          setOrganizationFilter(organization);
+        }}
+        organizations={organizations}
+      />
+      <IndexTable
+        resourceName={{
+          singular: 'Event',
+          plural: 'Events',
+        }}
+        itemCount={count}
+        selectedItemsCount={
+          allResourcesSelected ? 'All' : selectedResources.length
+        }
+        onSelectionChange={handleSelectionChange}
+        headings={[
+          { title: 'Organization' },
+          { title: 'Event' },
+          { title: 'Date' },
+        ]}
+        pagination={{
+          hasNext,
+          hasPrevious,
+          onNext: () => {
+            navToPage(page + 1);
+          },
+          onPrevious: () => {
+            navToPage(page - 1);
+          },
+        }}
+      >
+        {events.map(({ id, name, timestamp, organization }, index) => (
+          <IndexTable.Row
+            id={id}
+            key={id}
+            selected={selectedResources.includes(id)}
+            position={index}
+          >
+            <IndexTable.Cell>{organization.name}</IndexTable.Cell>
+            <IndexTable.Cell>{name}</IndexTable.Cell>
+            <IndexTable.Cell>
+              {timestampFormat.format(new Date(timestamp))}
+            </IndexTable.Cell>
+          </IndexTable.Row>
+        ))}
+      </IndexTable>
+    </>
   );
 }
