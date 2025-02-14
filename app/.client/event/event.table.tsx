@@ -1,9 +1,5 @@
 import { Organization, Session } from '@prisma/client';
-import {
-  DEFAULT_LOCALE,
-  IndexTable,
-  useIndexResourceState,
-} from '@shopify/polaris';
+import { DEFAULT_LOCALE, IndexTable } from '@shopify/polaris';
 import { EventListItem } from '../../.common/event/event';
 import { EVENT_PAGE_SIZE } from '../../.common/event/event.constants';
 import { SortOrder } from '../../.common/search.param';
@@ -38,8 +34,6 @@ export function EventTable({
   eventFilter,
   setEventFilter,
 }: EventTableProps) {
-  const { selectedResources, allResourcesSelected, handleSelectionChange } =
-    useIndexResourceState(events);
   const locale = session.locale || DEFAULT_LOCALE;
   const timestampFormat = Intl.DateTimeFormat(locale, {
     year: 'numeric',
@@ -72,10 +66,6 @@ export function EventTable({
           plural: 'Events',
         }}
         itemCount={count}
-        selectedItemsCount={
-          allResourcesSelected ? 'All' : selectedResources.length
-        }
-        onSelectionChange={handleSelectionChange}
         headings={[
           { title: 'Organization' },
           { title: 'Event' },
@@ -99,14 +89,10 @@ export function EventTable({
             direction === 'ascending' ? SortOrder.ASC : SortOrder.DESC,
           );
         }}
+        selectable={false}
       >
         {events.map(({ id, name, timestamp, organization }, index) => (
-          <IndexTable.Row
-            id={id}
-            key={id}
-            selected={selectedResources.includes(id)}
-            position={index}
-          >
+          <IndexTable.Row id={id} key={id} position={index}>
             <IndexTable.Cell>{organization.name}</IndexTable.Cell>
             <IndexTable.Cell>{name}</IndexTable.Cell>
             <IndexTable.Cell>
