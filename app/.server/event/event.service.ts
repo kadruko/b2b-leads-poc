@@ -10,7 +10,7 @@ class EventService {
   }
 
   public async findMany(shop: string, query: EventQuery) {
-    const { organizationId } = this.filter(query);
+    const { organizationId, name } = this.filter(query);
 
     return await prisma.event.findMany({
       skip: query.offset,
@@ -18,6 +18,7 @@ class EventService {
       where: {
         shop,
         organizationId,
+        name,
       },
       include: { organization: true },
       orderBy: { timestamp: 'desc' },
@@ -43,7 +44,7 @@ class EventService {
     return organizations;
   }
 
-  private filter({ organizationIds }: EventQuery) {
+  private filter({ organizationIds, eventNames }: EventQuery) {
     let organizationId;
     if (organizationIds?.length || 0 > 0) {
       organizationId = {
@@ -51,7 +52,14 @@ class EventService {
       };
     }
 
-    return { organizationId };
+    let name;
+    if (eventNames?.length || 0 > 0) {
+      name = {
+        in: eventNames,
+      };
+    }
+
+    return { organizationId, name };
   }
 }
 

@@ -17,6 +17,8 @@ interface EventTableProps {
   organizations: Organization[];
   organizationFilter: string[];
   setOrganizationFilter: (organizationIds: string[]) => void;
+  eventFilter: string[];
+  setEventFilter: (eventNames: string[]) => void;
 }
 
 export function EventTable({
@@ -28,6 +30,8 @@ export function EventTable({
   organizations,
   organizationFilter,
   setOrganizationFilter,
+  eventFilter,
+  setEventFilter,
 }: EventTableProps) {
   const { selectedResources, allResourcesSelected, handleSelectionChange } =
     useIndexResourceState(events);
@@ -47,9 +51,11 @@ export function EventTable({
       <EventFilter
         filter={{
           organization: organizationFilter,
+          event: eventFilter,
         }}
-        onFilter={({ organization }) => {
+        onFilter={({ organization, event }) => {
           setOrganizationFilter(organization);
+          setEventFilter(event);
         }}
         organizations={organizations}
       />

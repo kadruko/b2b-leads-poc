@@ -5,9 +5,11 @@ import {
   useSetIndexFiltersMode,
 } from '@shopify/polaris';
 import { OrganizationChoiceList } from '../organization/organization.choice-list';
+import { EventNameChoiceList } from './event.name.choice-list';
 
 type EventFilter = {
   organization: string[];
+  event: string[];
 };
 
 type EventFilterProps = {
@@ -19,10 +21,12 @@ type EventFilterProps = {
 
 enum EventFilterKey {
   ORGANIZATION = 'organization',
+  EVENT = 'event',
 }
 
 enum EventFilterLabel {
   ORGANIZATION = 'Organization',
+  EVENT = 'Event',
 }
 
 export function EventFilter({
@@ -45,6 +49,13 @@ export function EventFilter({
       onRemove: () => onFilter({ ...filter, organization: [] }),
     });
   }
+  if (filter.event.length > 0) {
+    appliedFilters.push({
+      key: EventFilterKey.EVENT,
+      label: `${EventFilterLabel.EVENT}: ${filter.event.join(', ')}`,
+      onRemove: () => onFilter({ ...filter, event: [] }),
+    });
+  }
 
   return (
     <IndexFilters
@@ -62,6 +73,16 @@ export function EventFilter({
               organizations={organizations}
               selected={filter.organization}
               onChange={(organization) => onFilter({ ...filter, organization })}
+            />
+          ),
+        },
+        {
+          key: EventFilterKey.EVENT,
+          label: EventFilterLabel.EVENT,
+          filter: (
+            <EventNameChoiceList
+              selected={filter.event}
+              onChange={(event) => onFilter({ ...filter, event })}
             />
           ),
         },
