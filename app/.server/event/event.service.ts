@@ -21,7 +21,7 @@ class EventService {
         name,
       },
       include: { organization: true },
-      orderBy: { timestamp: 'desc' },
+      orderBy: { timestamp: query.sortOrder },
     });
   }
 

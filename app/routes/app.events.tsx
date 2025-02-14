@@ -2,7 +2,8 @@ import { useLoaderData, useSearchParams } from '@remix-run/react';
 import { TitleBar } from '@shopify/app-bridge-react';
 import { Card, Layout, Page } from '@shopify/polaris';
 import { EventTable } from '../.client/event/event.table';
-import { DEFAULT_PAGE, SearchParam } from '../.common/search.param';
+import { DEFAULT_EVENT_SORT_ORDER } from '../.common/event/event.constants';
+import { DEFAULT_PAGE, SearchParam, SortOrder } from '../.common/search.param';
 import { EventLoader } from '../.server/event/event.loader';
 
 export const loader = EventLoader;
@@ -14,6 +15,8 @@ export default function EventPage() {
   const page = Number(searchParams.get(SearchParam.PAGE)) || DEFAULT_PAGE;
   const organizationIds = searchParams.getAll(SearchParam.ORGANIZATION);
   const eventNames = searchParams.getAll(SearchParam.EVENT);
+  const sortOrder =
+    searchParams.get(SearchParam.SORT_ORDER) || DEFAULT_EVENT_SORT_ORDER;
 
   return (
     <Page>
@@ -28,6 +31,12 @@ export default function EventPage() {
               session={session as any}
               navToPage={(page) => {
                 searchParams.set(SearchParam.PAGE, page.toString());
+                setSearchParams(searchParams);
+              }}
+              sortOrder={sortOrder as SortOrder}
+              setSortOrder={(sortOrder) => {
+                searchParams.delete(SearchParam.PAGE);
+                searchParams.set(SearchParam.SORT_ORDER, sortOrder);
                 setSearchParams(searchParams);
               }}
               organizations={organizations}

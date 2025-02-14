@@ -6,6 +6,7 @@ import {
 } from '@shopify/polaris';
 import { EventListItem } from '../../.common/event/event';
 import { EVENT_PAGE_SIZE } from '../../.common/event/event.constants';
+import { SortOrder } from '../../.common/search.param';
 import { EventFilter } from './event.filter';
 
 interface EventTableProps {
@@ -14,6 +15,8 @@ interface EventTableProps {
   session: Session;
   page: number;
   navToPage: (page: number) => void;
+  sortOrder: SortOrder;
+  setSortOrder: (sortOrder: SortOrder) => void;
   organizations: Organization[];
   organizationFilter: string[];
   setOrganizationFilter: (organizationIds: string[]) => void;
@@ -27,6 +30,8 @@ export function EventTable({
   session,
   page,
   navToPage,
+  sortOrder,
+  setSortOrder,
   organizations,
   organizationFilter,
   setOrganizationFilter,
@@ -45,6 +50,8 @@ export function EventTable({
   });
   const hasNext = page * EVENT_PAGE_SIZE < count;
   const hasPrevious = page > 1;
+  const sortDirection =
+    sortOrder === SortOrder.ASC ? 'ascending' : 'descending';
 
   return (
     <>
@@ -83,6 +90,14 @@ export function EventTable({
           onPrevious: () => {
             navToPage(page - 1);
           },
+        }}
+        sortable={[false, false, true]}
+        sortColumnIndex={2}
+        sortDirection={sortDirection}
+        onSort={(_, direction) => {
+          setSortOrder(
+            direction === 'ascending' ? SortOrder.ASC : SortOrder.DESC,
+          );
         }}
       >
         {events.map(({ id, name, timestamp, organization }, index) => (
