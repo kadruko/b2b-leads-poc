@@ -1,0 +1,115 @@
+meta {
+  name: Create Product removed from Cart Event
+  type: http
+  seq: 5
+}
+
+post {
+  url: {{baseUrl}}/events
+  body: json
+  auth: none
+}
+
+headers {
+  X-Forwarded-For: {{ipAddress}}
+}
+
+body:json {
+  {
+    "id": "shu-0be51ec7-D9A6-4904-9D85-BB020CC2FB59",
+    "name": "product_removed_from_cart",
+    "data": {
+      "cartLine": {
+        "cost": {
+          "totalAmount": {
+            "amount": 629.95,
+            "currencyCode": "EUR"
+          }
+        },
+        "merchandise": {
+          "id": "53976337219969",
+          "image": {
+            "src": "https://cdn.shopify.com/s/files/1/0898/3560/2305/files/Main_9129b69a-0c7b-4f66-b6cf-c4222f18028a.jpg?v=1736612944"
+          },
+          "price": {
+            "amount": 629.95,
+            "currencyCode": "EUR"
+          },
+          "product": {
+            "id": "14975895437697",
+            "title": "The Multi-managed Snowboard",
+            "vendor": "Multi-managed Vendor",
+            "type": "snowboard",
+            "untranslatedTitle": "The Multi-managed Snowboard",
+            "url": "/products/the-multi-managed-snowboard?variant=53976337219969"
+          },
+          "sku": "sku-managed-1",
+          "title": null,
+          "untranslatedTitle": null
+        },
+        "quantity": 1
+      }
+    },
+    "type": "standard",
+    "timestamp": "2025-02-15T23:15:12.642Z",
+    "context": {
+      "document": {
+        "location": {
+          "href": "https://b2b-leads-poc.myshopify.com/cart",
+          "hash": "",
+          "host": "b2b-leads-poc.myshopify.com",
+          "hostname": "b2b-leads-poc.myshopify.com",
+          "origin": "https://b2b-leads-poc.myshopify.com",
+          "pathname": "/cart",
+          "port": "",
+          "protocol": "https:",
+          "search": ""
+        },
+        "referrer": "https://b2b-leads-poc.myshopify.com/",
+        "characterSet": "UTF-8",
+        "title": "Your Shopping Cart – b2b-leads-poc"
+      },
+      "navigator": {
+        "language": "de-DE",
+        "cookieEnabled": true,
+        "languages": [
+          "de-DE",
+          "de",
+          "en-US",
+          "en"
+        ],
+        "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36"
+      },
+      "window": {
+        "innerHeight": 695,
+        "innerWidth": 898,
+        "outerHeight": 816,
+        "outerWidth": 1536,
+        "pageXOffset": 0,
+        "pageYOffset": 0,
+        "location": {
+          "href": "https://b2b-leads-poc.myshopify.com/cart",
+          "hash": "",
+          "host": "b2b-leads-poc.myshopify.com",
+          "hostname": "b2b-leads-poc.myshopify.com",
+          "origin": "https://b2b-leads-poc.myshopify.com",
+          "pathname": "/cart",
+          "port": "",
+          "protocol": "https:",
+          "search": ""
+        },
+        "origin": "https://b2b-leads-poc.myshopify.com",
+        "screen": {
+          "height": 864,
+          "width": 1536
+        },
+        "screenX": 0,
+        "screenY": 0,
+        "scrollX": 0,
+        "scrollY": 0
+      }
+    },
+    "seq": 1,
+    "clientId": "021c6a47-ea71-4510-9309-9afbfddea271"
+  }
+}

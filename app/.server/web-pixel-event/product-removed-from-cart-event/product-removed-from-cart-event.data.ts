@@ -1,5 +1,5 @@
 import { CartLine } from '../../shopify/cart-line';
 
-export type ProductAddedToCartEventData = {
+export type ProductRemovedFromCartEventData = {
   cartLine: CartLine | null;
 };

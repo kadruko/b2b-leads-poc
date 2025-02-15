@@ -1,14 +1,14 @@
 import { CreateEventProduct } from '../../event/product/event-product';
 import { eventProductService } from '../../event/product/event-product.service';
 import { WebPixelEventService } from '../web-pixel-event.service';
-import { ProductAddedToCartEventData } from './product-added-to-cart-event.data';
+import { ProductRemovedFromCartEventData } from './product-removed-from-cart-event.data';
 
-class ProductAddedToCartEventService
-  implements WebPixelEventService<ProductAddedToCartEventData>
+class ProductRemovedFromCartEventService
+  implements WebPixelEventService<ProductRemovedFromCartEventData>
 {
   async handleData(
     eventId: string,
-    { cartLine }: ProductAddedToCartEventData,
+    { cartLine }: ProductRemovedFromCartEventData,
   ): Promise<void> {
     if (!cartLine?.merchandise.id) {
       return;
@@ -22,5 +22,5 @@ class ProductAddedToCartEventService
   }
 }
 
-export const productAddedToCartEventService =
-  new ProductAddedToCartEventService();
+export const productRemovedFromCartEventService =
+  new ProductRemovedFromCartEventService();
