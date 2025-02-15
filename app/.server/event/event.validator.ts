@@ -4,7 +4,7 @@ import {
 } from '../../.common/event/event.constants';
 import { EventName } from '../../.common/event/event.name';
 import { EventType } from '../../.common/event/event.type';
-import { WebPixelEvent } from '../shopify/web-pixel-event';
+import { WebPixelEvent } from '../web-pixel-event/web-pixel-event';
 
 class EventValidator {
   validateWebPixelEvent({ type, name }: WebPixelEvent): void {

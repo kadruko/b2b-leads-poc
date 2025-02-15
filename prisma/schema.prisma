@@ -59,4 +59,31 @@ model Event {
   // Organization
   organizationId String
   organization Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+
+  // Products
+  products EventProduct[]
 }
+
+model EventProduct {
+  id String @id @default(uuid())
+  productVariantId String
+
+  // Event
+  eventId String
+  event Event @relation(fields: [eventId], references: [id], onDelete: Cascade)
+
+  @@unique([eventId, productVariantId])
+}
+
+// model EventCheckout {
+//   orderId String // only available for checkout completed
+//   // Address information
+//   email String
+//   phone String
+//   address1 String
+//   address2 String
+// }
+
+// model EventCollection {
+//   collectionId String
+// }

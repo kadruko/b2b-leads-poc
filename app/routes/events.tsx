@@ -1,4 +1,5 @@
 import { ActionFunctionArgs } from '@remix-run/node';
+import { EventName } from '../.common/event/event.name';
 import { eventMapper } from '../.server/event/event.mapper';
 import { eventService } from '../.server/event/event.service';
 import { eventValidator } from '../.server/event/event.validator';
@@ -6,7 +7,12 @@ import { ipLookupService } from '../.server/ip-lookup/ip-lookup.service';
 import { ipService } from '../.server/ip/ip.service';
 import { ipValidator } from '../.server/ip/ip.validator';
 import { organizationService } from '../.server/organization/organization.service';
-import { WebPixelEvent } from '../.server/shopify/web-pixel-event';
+import { WebPixelEventData } from '../.server/shopify/web-pixel-event.data';
+import { WebPixelEvent } from '../.server/web-pixel-event/web-pixel-event';
+import {
+  WEB_PIXEL_EVENT_SERVICE,
+  WebPixelEventService,
+} from '../.server/web-pixel-event/web-pixel-event.service';
 
 const RESPONSE_HEADERS = {
   'Content-Type': 'application/json',
@@ -59,5 +65,18 @@ const createEventFromRequest = async (request: Request) => {
     organization.id,
     webPixelEvent,
   );
-  await eventService.create(event);
+  const { id } = await eventService.create(event);
+  await handleEventData(id, webPixelEvent);
+};
+
+const handleEventData = async (
+  eventId: string,
+  { name, data }: WebPixelEvent,
+) => {
+  const webPixelEventService:
+    | WebPixelEventService<WebPixelEventData>
+    | undefined = WEB_PIXEL_EVENT_SERVICE[name as EventName];
+  if (webPixelEventService) {
+    await webPixelEventService.handleData(eventId, data);
+  }
 };

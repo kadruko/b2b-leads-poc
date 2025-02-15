@@ -1,5 +1,5 @@
 import { CreateEvent } from '../../.common/event/event';
-import { WebPixelEvent } from '../shopify/web-pixel-event';
+import { WebPixelEvent } from '../web-pixel-event/web-pixel-event';
 
 class EventMapper {
   fromWebPixelEvent(

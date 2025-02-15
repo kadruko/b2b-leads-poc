@@ -1,0 +1,106 @@
+meta {
+  name: Create Product Viewed Event
+  type: http
+  seq: 3
+}
+
+post {
+  url: {{baseUrl}}/events
+  body: json
+  auth: none
+}
+
+headers {
+  X-Forwarded-For: {{ipAddress}}
+}
+
+body:json {
+  {
+    "id": "sh-0a6fbbe6-839F-4BF8-244B-2CC186E6D04C",
+    "name": "product_viewed",
+    "data": {
+      "productVariant": {
+        "price": {
+          "amount": 629.95,
+          "currencyCode": "EUR"
+        },
+        "product": {
+          "title": "The Multi-managed Snowboard",
+          "vendor": "Multi-managed Vendor",
+          "id": "14975895437697",
+          "untranslatedTitle": "The Multi-managed Snowboard",
+          "url": "/products/the-multi-managed-snowboard",
+          "type": "snowboard"
+        },
+        "id": "53976337219969",
+        "image": {
+          "src": "//b2b-leads-poc.myshopify.com/cdn/shop/files/Main_9129b69a-0c7b-4f66-b6cf-c4222f18028a.jpg?v=1736612944"
+        },
+        "sku": "sku-managed-1",
+        "title": "Default Title",
+        "untranslatedTitle": "Default Title"
+      }
+    },
+    "type": "standard",
+    "timestamp": "2025-02-15T16:27:29.129Z",
+    "context": {
+      "document": {
+        "location": {
+          "href": "https://b2b-leads-poc.myshopify.com/products/the-multi-managed-snowboard",
+          "hash": "",
+          "host": "b2b-leads-poc.myshopify.com",
+          "hostname": "b2b-leads-poc.myshopify.com",
+          "origin": "https://b2b-leads-poc.myshopify.com",
+          "pathname": "/products/the-multi-managed-snowboard",
+          "port": "",
+          "protocol": "https:",
+          "search": ""
+        },
+        "referrer": "https://b2b-leads-poc.myshopify.com/",
+        "characterSet": "UTF-8",
+        "title": "The Multi-managed Snowboard – b2b-leads-poc"
+      },
+      "navigator": {
+        "language": "de-DE",
+        "cookieEnabled": true,
+        "languages": [
+          "de-DE",
+          "de",
+          "en-US",
+          "en"
+        ],
+        "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36"
+      },
+      "window": {
+        "innerHeight": 695,
+        "innerWidth": 898,
+        "outerHeight": 816,
+        "outerWidth": 1536,
+        "pageXOffset": 0,
+        "pageYOffset": 0,
+        "location": {
+          "href": "https://b2b-leads-poc.myshopify.com/products/the-multi-managed-snowboard",
+          "hash": "",
+          "host": "b2b-leads-poc.myshopify.com",
+          "hostname": "b2b-leads-poc.myshopify.com",
+          "origin": "https://b2b-leads-poc.myshopify.com",
+          "pathname": "/products/the-multi-managed-snowboard",
+          "port": "",
+          "protocol": "https:",
+          "search": ""
+        },
+        "origin": "https://b2b-leads-poc.myshopify.com",
+        "screen": {
+          "height": 864,
+          "width": 1536
+        },
+        "screenX": 0,
+        "screenY": 0,
+        "scrollX": 0,
+        "scrollY": 0
+      }
+    },
+    "seq": 1,
+    "clientId": "021c6a47-ea71-4510-9309-9afbfddea271"
+  }
+}
