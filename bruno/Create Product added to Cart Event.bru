@@ -1,0 +1,115 @@
+meta {
+  name: Create Product added to Cart Event
+  type: http
+  seq: 4
+}
+
+post {
+  url: {{baseUrl}}/events
+  body: json
+  auth: none
+}
+
+headers {
+  X-Forwarded-For: {{ipAddress}}
+}
+
+body:json {
+  {
+    "id": "sh-0bdb5ba7-43BF-44D9-B29E-30595983EB6F",
+    "name": "product_added_to_cart",
+    "data": {
+      "cartLine": {
+        "cost": {
+          "totalAmount": {
+            "amount": 749.95,
+            "currencyCode": "EUR"
+          }
+        },
+        "merchandise": {
+          "id": "53976337121665",
+          "image": {
+            "src": "https://cdn.shopify.com/s/files/1/0898/3560/2305/files/Main_b13ad453-477c-4ed1-9b43-81f3345adfd6.jpg?v=1736612943"
+          },
+          "price": {
+            "amount": 749.95,
+            "currencyCode": "EUR"
+          },
+          "product": {
+            "id": "14975895339393",
+            "title": "The Collection Snowboard: Liquid",
+            "vendor": "Hydrogen Vendor",
+            "type": "snowboard",
+            "untranslatedTitle": "The Collection Snowboard: Liquid",
+            "url": "/products/the-collection-snowboard-liquid?variant=53976337121665"
+          },
+          "sku": "",
+          "title": null,
+          "untranslatedTitle": null
+        },
+        "quantity": 1
+      }
+    },
+    "type": "standard",
+    "timestamp": "2025-02-15T23:04:32.133Z",
+    "context": {
+      "document": {
+        "location": {
+          "href": "https://b2b-leads-poc.myshopify.com/products/the-collection-snowboard-liquid",
+          "hash": "",
+          "host": "b2b-leads-poc.myshopify.com",
+          "hostname": "b2b-leads-poc.myshopify.com",
+          "origin": "https://b2b-leads-poc.myshopify.com",
+          "pathname": "/products/the-collection-snowboard-liquid",
+          "port": "",
+          "protocol": "https:",
+          "search": ""
+        },
+        "referrer": "https://b2b-leads-poc.myshopify.com/",
+        "characterSet": "UTF-8",
+        "title": "The Collection Snowboard: Liquid – b2b-leads-poc"
+      },
+      "navigator": {
+        "language": "de-DE",
+        "cookieEnabled": true,
+        "languages": [
+          "de-DE",
+          "de",
+          "en-US",
+          "en"
+        ],
+        "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36"
+      },
+      "window": {
+        "innerHeight": 695,
+        "innerWidth": 898,
+        "outerHeight": 816,
+        "outerWidth": 1536,
+        "pageXOffset": 0,
+        "pageYOffset": 0,
+        "location": {
+          "href": "https://b2b-leads-poc.myshopify.com/products/the-collection-snowboard-liquid",
+          "hash": "",
+          "host": "b2b-leads-poc.myshopify.com",
+          "hostname": "b2b-leads-poc.myshopify.com",
+          "origin": "https://b2b-leads-poc.myshopify.com",
+          "pathname": "/products/the-collection-snowboard-liquid",
+          "port": "",
+          "protocol": "https:",
+          "search": ""
+        },
+        "origin": "https://b2b-leads-poc.myshopify.com",
+        "screen": {
+          "height": 864,
+          "width": 1536
+        },
+        "screenX": 0,
+        "screenY": 0,
+        "scrollX": 0,
+        "scrollY": 0
+      }
+    },
+    "seq": 1,
+    "clientId": "021c6a47-ea71-4510-9309-9afbfddea271"
+  }
+}

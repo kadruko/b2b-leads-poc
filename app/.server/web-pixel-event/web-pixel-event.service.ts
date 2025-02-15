@@ -1,4 +1,5 @@
 import { EventName } from '../../.common/event/event.name';
+import { productAddedToCartEventService } from './product-added-to-cart-event/product-added-to-cart-event.service';
 import { productViewedEventService } from './product-viewed-event/product-viewed-event.service';
 import { WebPixelEventData } from './web-pixel-event.data';
 
@@ -20,7 +21,7 @@ export const WEB_PIXEL_EVENT_SERVICE: Record<
   [EventName.COLLECTION_VIEWED]: undefined,
   [EventName.PAGE_VIEWED]: undefined,
   [EventName.PAYMENT_INFO_SUBMITTED]: undefined,
-  [EventName.PRODUCT_ADDED_TO_CART]: undefined,
+  [EventName.PRODUCT_ADDED_TO_CART]: productAddedToCartEventService,
   [EventName.PRODUCT_REMOVED_FROM_CART]: undefined,
   [EventName.PRODUCT_VIEWED]: productViewedEventService,
   [EventName.SEARCH_SUBMITTED]: undefined,
