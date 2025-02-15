@@ -1,0 +1,188 @@
+meta {
+  name: Create Cart Viewed Event
+  type: http
+  seq: 6
+}
+
+post {
+  url: {{baseUrl}}/events
+  body: json
+  auth: none
+}
+
+headers {
+  X-Forwarded-For: {{ipAddress}}
+}
+
+body:json {
+  {
+    "id": "shu-0bef8590-97E4-4237-0A64-4E5B2BADE7BB",
+    "name": "cart_viewed",
+    "data": {
+      "cart": {
+        "cost": {
+          "totalAmount": {
+            "amount": 2149.85,
+            "currencyCode": "EUR"
+          }
+        },
+        "lines": [
+          {
+            "cost": {
+              "totalAmount": {
+                "amount": 699.95,
+                "currencyCode": "EUR"
+              }
+            },
+            "merchandise": {
+              "price": {
+                "amount": 699.95,
+                "currencyCode": "EUR"
+              },
+              "product": {
+                "title": "The Complete Snowboard",
+                "vendor": "Snowboard Vendor",
+                "id": "14975895241089",
+                "untranslatedTitle": "The Complete Snowboard",
+                "url": "/products/the-complete-snowboard",
+                "type": "snowboard"
+              },
+              "id": "53976336957825",
+              "image": {
+                "src": "//b2b-leads-poc.myshopify.com/cdn/shop/files/Main_589fc064-24a2-4236-9eaf-13b2bd35d21d.jpg?v=1736612942"
+              },
+              "sku": null,
+              "title": "Sunset",
+              "untranslatedTitle": "Sunset"
+            },
+            "quantity": 1
+          },
+          {
+            "cost": {
+              "totalAmount": {
+                "amount": 699.95,
+                "currencyCode": "EUR"
+              }
+            },
+            "merchandise": {
+              "price": {
+                "amount": 699.95,
+                "currencyCode": "EUR"
+              },
+              "product": {
+                "title": "The Complete Snowboard",
+                "vendor": "Snowboard Vendor",
+                "id": "14975895241089",
+                "untranslatedTitle": "The Complete Snowboard",
+                "url": "/products/the-complete-snowboard",
+                "type": "snowboard"
+              },
+              "id": "53976336826753",
+              "image": {
+                "src": "//b2b-leads-poc.myshopify.com/cdn/shop/files/Main_589fc064-24a2-4236-9eaf-13b2bd35d21d.jpg?v=1736612942"
+              },
+              "sku": null,
+              "title": "Ice",
+              "untranslatedTitle": "Ice"
+            },
+            "quantity": 1
+          },
+          {
+            "cost": {
+              "totalAmount": {
+                "amount": 749.95,
+                "currencyCode": "EUR"
+              }
+            },
+            "merchandise": {
+              "price": {
+                "amount": 749.95,
+                "currencyCode": "EUR"
+              },
+              "product": {
+                "title": "The Collection Snowboard: Liquid",
+                "vendor": "Hydrogen Vendor",
+                "id": "14975895339393",
+                "untranslatedTitle": "The Collection Snowboard: Liquid",
+                "url": "/products/the-collection-snowboard-liquid",
+                "type": "snowboard"
+              },
+              "id": "53976337121665",
+              "image": {
+                "src": "//b2b-leads-poc.myshopify.com/cdn/shop/files/Main_b13ad453-477c-4ed1-9b43-81f3345adfd6.jpg?v=1736612943"
+              },
+              "sku": null,
+              "title": "Default Title",
+              "untranslatedTitle": "Default Title"
+            },
+            "quantity": 1
+          }
+        ],
+        "totalQuantity": 3,
+        "attributes": [],
+        "id": "Z2NwLWV1cm9wZS13ZXN0NDowMUpLUjNOU1M1MlBRUFozUDMwOTRNRDZWQg"
+      }
+    },
+    "type": "standard",
+    "timestamp": "2025-02-15T23:26:41.191Z",
+    "context": {
+      "document": {
+        "location": {
+          "href": "https://b2b-leads-poc.myshopify.com/cart",
+          "hash": "",
+          "host": "b2b-leads-poc.myshopify.com",
+          "hostname": "b2b-leads-poc.myshopify.com",
+          "origin": "https://b2b-leads-poc.myshopify.com",
+          "pathname": "/cart",
+          "port": "",
+          "protocol": "https:",
+          "search": ""
+        },
+        "referrer": "https://b2b-leads-poc.myshopify.com/",
+        "characterSet": "UTF-8",
+        "title": "Your Shopping Cart – b2b-leads-poc"
+      },
+      "navigator": {
+        "language": "de-DE",
+        "cookieEnabled": true,
+        "languages": [
+          "de-DE",
+          "de",
+          "en-US",
+          "en"
+        ],
+        "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36"
+      },
+      "window": {
+        "innerHeight": 695,
+        "innerWidth": 898,
+        "outerHeight": 816,
+        "outerWidth": 1536,
+        "pageXOffset": 0,
+        "pageYOffset": 0,
+        "location": {
+          "href": "https://b2b-leads-poc.myshopify.com/cart",
+          "hash": "",
+          "host": "b2b-leads-poc.myshopify.com",
+          "hostname": "b2b-leads-poc.myshopify.com",
+          "origin": "https://b2b-leads-poc.myshopify.com",
+          "pathname": "/cart",
+          "port": "",
+          "protocol": "https:",
+          "search": ""
+        },
+        "origin": "https://b2b-leads-poc.myshopify.com",
+        "screen": {
+          "height": 864,
+          "width": 1536
+        },
+        "screenX": 0,
+        "screenY": 0,
+        "scrollX": 0,
+        "scrollY": 0
+      }
+    },
+    "seq": 1,
+    "clientId": "021c6a47-ea71-4510-9309-9afbfddea271"
+  }
+}

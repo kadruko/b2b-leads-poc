@@ -1,4 +1,4 @@
-import { ProductVariant } from './product-variant';
+import { ProductVariant } from './product-variant/product-variant';
 
 export type CartLine = {
   cost: any;

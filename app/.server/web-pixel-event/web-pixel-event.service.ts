@@ -1,4 +1,5 @@
 import { EventName } from '../../.common/event/event.name';
+import { cartViewedEventService } from './cart-viewed-event/cart-viewed-event.service';
 import { productAddedToCartEventService } from './product-added-to-cart-event/product-added-to-cart-event.service';
 import { productRemovedFromCartEventService } from './product-removed-from-cart-event/product-removed-from-cart-event.service';
 import { productViewedEventService } from './product-viewed-event/product-viewed-event.service';
@@ -13,7 +14,7 @@ export const WEB_PIXEL_EVENT_SERVICE: Record<
   WebPixelEventService<WebPixelEventData> | undefined
 > = {
   [EventName.ALERT_DISPLAYED]: undefined,
-  [EventName.CART_VIEWED]: undefined,
+  [EventName.CART_VIEWED]: cartViewedEventService,
   [EventName.CHECKOUT_ADDRESS_INFO_SUBMITTED]: undefined,
   [EventName.CHECKOUT_COMPLETED]: undefined,
   [EventName.CHECKOUT_CONTACT_INFO_SUBMITTED]: undefined,

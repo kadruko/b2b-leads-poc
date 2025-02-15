@@ -18,19 +18,22 @@ export function EventRow({ session, item, index }: EventRowProps) {
     minute: '2-digit',
   });
 
-  let product = '';
-  if (item.products.length > 0) {
-    const [first] = item.products;
-    if (first.productVariant) {
-      product = first.productVariant.product.title;
-    }
-  }
+  const product = item.products
+    .map((p) => (p.productVariant ? p.productVariant.product.title : ''))
+    .filter((title) => title)
+    .join(', ');
+
+  const maxLength = 30;
+  const truncatedProduct =
+    product.length > maxLength
+      ? product.substring(0, maxLength) + '...'
+      : product;
 
   return (
     <IndexTable.Row id={item.id} key={item.id} position={index}>
       <IndexTable.Cell>{item.organization.name}</IndexTable.Cell>
       <IndexTable.Cell>{item.name}</IndexTable.Cell>
-      <IndexTable.Cell>{product}</IndexTable.Cell>
+      <IndexTable.Cell>{truncatedProduct}</IndexTable.Cell>
       <IndexTable.Cell>
         {timestampFormat.format(new Date(item.timestamp))}
       </IndexTable.Cell>
