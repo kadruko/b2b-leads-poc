@@ -1,5 +1,6 @@
 import { LoaderFunctionArgs } from '@remix-run/node';
 import { Session } from '@shopify/shopify-api';
+import { AdminContext } from '@shopify/shopify-app-remix/server';
 import {
   DEFAULT_EVENT_SORT_ORDER,
   EVENT_PAGE_SIZE,
@@ -14,17 +15,17 @@ import { EventQuery } from './event.query';
 import { eventService } from './event.service';
 
 export const EventLoader = async ({ request }: LoaderFunctionArgs) => {
-  const { session } = await authenticate.admin(request);
+  const adminContext = await authenticate.admin(request);
 
   const [{ events, count }, { organizations }] = await Promise.all([
-    loadEvents(request, session),
-    loadDistinctOrganizations(session),
+    loadEvents(request, adminContext as unknown as AdminContext),
+    loadDistinctOrganizations(adminContext.session),
   ]);
 
-  return { events, count, session, organizations };
+  return { events, count, session: adminContext.session, organizations };
 };
 
-const loadEvents = async (request: Request, { shop }: Session) => {
+const loadEvents = async (request: Request, adminContext: AdminContext) => {
   const searchParams = new URL(request.url).searchParams;
   const page = Number(searchParams.get(SearchParam.PAGE)) || DEFAULT_PAGE;
   const offset = (page - 1) * EVENT_PAGE_SIZE;
@@ -40,8 +41,8 @@ const loadEvents = async (request: Request, { shop }: Session) => {
     eventNames,
   };
 
-  const events = await eventService.findMany(shop, query);
-  const count = await eventService.count(shop, query);
+  const events = await eventService.findMany(adminContext, query);
+  const count = await eventService.count(adminContext.session.shop, query);
 
   return { events, count };
 };

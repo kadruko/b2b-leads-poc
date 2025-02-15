@@ -1,4 +1,4 @@
-import { Product } from './product';
+import { Product } from '../product';
 
 export type ProductVariant = {
   id: string | null;
@@ -7,4 +7,7 @@ export type ProductVariant = {
   product: Product;
   sku: string | null;
   untranslatedTitle: string | null;
+
+  // GraphQL only
+  title?: string;
 };

@@ -1,9 +1,10 @@
 import { Organization, Session } from '@prisma/client';
-import { DEFAULT_LOCALE, IndexTable } from '@shopify/polaris';
+import { IndexTable } from '@shopify/polaris';
 import { EventListItem } from '../../.common/event/event';
 import { EVENT_PAGE_SIZE } from '../../.common/event/event.constants';
 import { SortOrder } from '../../.common/search.param';
 import { EventFilter } from './event.filter';
+import { EventRow } from './event.row';
 
 interface EventTableProps {
   events: EventListItem[];
@@ -34,14 +35,6 @@ export function EventTable({
   eventFilter,
   setEventFilter,
 }: EventTableProps) {
-  const locale = session.locale || DEFAULT_LOCALE;
-  const timestampFormat = Intl.DateTimeFormat(locale, {
-    year: 'numeric',
-    month: '2-digit',
-    day: '2-digit',
-    hour: '2-digit',
-    minute: '2-digit',
-  });
   const hasNext = page * EVENT_PAGE_SIZE < count;
   const hasPrevious = page > 1;
   const sortDirection =
@@ -69,6 +62,7 @@ export function EventTable({
         headings={[
           { title: 'Organization' },
           { title: 'Event' },
+          { title: 'Product' },
           { title: 'Date' },
         ]}
         pagination={{
@@ -81,8 +75,8 @@ export function EventTable({
             navToPage(page - 1);
           },
         }}
-        sortable={[false, false, true]}
-        sortColumnIndex={2}
+        sortable={[false, false, false, true]}
+        sortColumnIndex={3}
         sortDirection={sortDirection}
         onSort={(_, direction) => {
           setSortOrder(
@@ -91,14 +85,8 @@ export function EventTable({
         }}
         selectable={false}
       >
-        {events.map(({ id, name, timestamp, organization }, index) => (
-          <IndexTable.Row id={id} key={id} position={index}>
-            <IndexTable.Cell>{organization.name}</IndexTable.Cell>
-            <IndexTable.Cell>{name}</IndexTable.Cell>
-            <IndexTable.Cell>
-              {timestampFormat.format(new Date(timestamp))}
-            </IndexTable.Cell>
-          </IndexTable.Row>
+        {events.map((item, index) => (
+          <EventRow session={session} item={item} index={index} />
         ))}
       </IndexTable>
     </>
