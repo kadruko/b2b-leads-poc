@@ -1,5 +1,6 @@
 import { IndexTable } from '@shopify/polaris';
 import { Interest } from '../../.common/interest/interest';
+import { InterestRow } from './interest.row';
 
 type InterestTableProps = {
   interests: Interest[];
@@ -17,17 +18,8 @@ export function InterestTable({ interests, count }: InterestTableProps) {
       headings={[{ title: 'Product' }, { title: 'Score' }]}
       selectable={false}
     >
-      {interests.map(({ productVariant, interestScore }, index) => (
-        <IndexTable.Row
-          id={productVariant?.id || index.toString()}
-          key={productVariant?.id || index}
-          position={index}
-        >
-          <IndexTable.Cell>
-            {productVariant?.product.title || 'Product not found'}
-          </IndexTable.Cell>
-          <IndexTable.Cell>{interestScore}</IndexTable.Cell>
-        </IndexTable.Row>
+      {interests.map((interest, index) => (
+        <InterestRow interest={interest} index={index} />
       ))}
     </IndexTable>
   );

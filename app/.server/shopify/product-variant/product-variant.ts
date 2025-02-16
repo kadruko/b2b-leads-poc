@@ -1,8 +1,9 @@
+import { Image } from '../image';
 import { Product } from '../product';
 
 export type ProductVariant = {
   id: string | null;
-  image: any | null;
+  image: Image | null;
   price: any | null;
   product: Product;
   sku: string | null;

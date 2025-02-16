@@ -1,5 +1,5 @@
 import { AdminContext } from '@shopify/shopify-app-remix/server';
-import { ProductVariant } from '../product-variant';
+import { ProductVariant } from './product-variant';
 
 class ProductVariantService {
   public async findMany(
@@ -17,10 +17,16 @@ class ProductVariantService {
           id
           title
           product {
-              title
-          }
-          image {
-              src
+            title
+            media (first: 1) {
+              nodes {
+                preview {
+                  image {
+                    url
+                  }
+                }
+              }
+            }
           }
         }
     `,

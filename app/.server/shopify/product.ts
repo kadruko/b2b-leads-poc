@@ -1,3 +1,5 @@
+import { Media } from './media';
+
 export type Product = {
   id: string | null;
   title: string;
@@ -5,4 +7,5 @@ export type Product = {
   untranslatedTitle: string | null;
   url: string | null;
   vendor: string;
+  media: Media;
 };
