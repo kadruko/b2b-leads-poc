@@ -1,17 +1,15 @@
 import { useLoaderData } from '@remix-run/react';
-import { TitleBar } from '@shopify/app-bridge-react';
 import { Card, Layout, Page } from '@shopify/polaris';
 import { LeadTable } from '../.client/lead/lead.table';
-import { LeadLoader } from '../.server/lead/lead.loader';
+import { LeadListLoader } from '../.server/lead/lead-list.loader';
 
-export const loader = LeadLoader;
+export const loader = LeadListLoader;
 
-export default function LeadPage() {
+export default function LeadListPage() {
   const { leads } = useLoaderData<typeof loader>();
 
   return (
-    <Page>
-      <TitleBar title="Leads" />
+    <Page title="Leads">
       <Layout>
         <Layout.Section>
           <Card>

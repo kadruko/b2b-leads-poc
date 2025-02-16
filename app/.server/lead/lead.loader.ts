@@ -3,15 +3,19 @@ import { Session } from '@shopify/shopify-api';
 import { authenticate } from '../../shopify.server';
 import { leadService } from './lead.service';
 
-export const LeadLoader = async ({ request }: LoaderFunctionArgs) => {
+export const LeadLoader = async ({ request, params }: LoaderFunctionArgs) => {
   const { session } = await authenticate.admin(request);
 
-  const { leads } = await loadLeads(session);
+  const organizationId = params.orgId;
+  if (!organizationId) {
+    throw new Error('Organization ID is required');
+  }
 
-  return { leads };
+  const { lead } = await loadLead(session, organizationId);
+  return { lead };
 };
 
-const loadLeads = async ({ shop }: Session) => {
-  const leads = await leadService.findMany(shop);
-  return { leads };
+const loadLead = async ({ shop }: Session, organizationId: string) => {
+  const lead = await leadService.findOne(shop, organizationId);
+  return { lead };
 };

@@ -1,3 +1,4 @@
+import { useNavigate } from '@remix-run/react';
 import { IndexTable } from '@shopify/polaris';
 import { Lead } from '../../.common/lead/lead';
 
@@ -7,6 +8,8 @@ type LeadTableProps = {
 };
 
 export function LeadTable({ leads, count }: LeadTableProps) {
+  const navigate = useNavigate();
+
   return (
     <IndexTable
       resourceName={{
@@ -22,6 +25,7 @@ export function LeadTable({ leads, count }: LeadTableProps) {
           id={organizationId}
           key={organizationId}
           position={index}
+          onClick={() => navigate(`/app/leads/${organizationId}`)}
         >
           <IndexTable.Cell>{organizationName}</IndexTable.Cell>
           <IndexTable.Cell>{leadScore}</IndexTable.Cell>

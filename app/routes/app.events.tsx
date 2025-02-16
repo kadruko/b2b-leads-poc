@@ -1,5 +1,4 @@
 import { useLoaderData, useSearchParams } from '@remix-run/react';
-import { TitleBar } from '@shopify/app-bridge-react';
 import { Card, Layout, Page } from '@shopify/polaris';
 import { EventTable } from '../.client/event/event.table';
 import { DEFAULT_EVENT_SORT_ORDER } from '../.common/event/event.constants';
@@ -19,8 +18,7 @@ export default function EventPage() {
     searchParams.get(SearchParam.SORT_ORDER) || DEFAULT_EVENT_SORT_ORDER;
 
   return (
-    <Page>
-      <TitleBar title="Events" />
+    <Page title="Events">
       <Layout>
         <Layout.Section>
           <Card>
