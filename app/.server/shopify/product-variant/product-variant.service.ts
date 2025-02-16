@@ -23,9 +23,13 @@ class ProductVariantService {
                 preview {
                   image {
                     url
+                    altText
                   }
                 }
               }
+            }
+            variantsCount {
+              count
             }
           }
         }

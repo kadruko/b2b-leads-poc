@@ -1,6 +1,7 @@
 import { Session } from '@prisma/client';
-import { DEFAULT_LOCALE, IndexTable } from '@shopify/polaris';
+import { DEFAULT_LOCALE, IndexTable, Text } from '@shopify/polaris';
 import { EventListItem } from '../../.common/event/event';
+import { productVariantFormatter } from '../product-variant/product-variant.formatter';
 
 type EventRowProps = {
   session: Session;
@@ -19,11 +20,10 @@ export function EventRow({ session, item, index }: EventRowProps) {
   });
 
   const product = item.products
-    .map((p) => (p.productVariant ? p.productVariant.product.title : ''))
-    .filter((title) => title)
+    .map((p) => productVariantFormatter.formatText(p.productVariant))
     .join(', ');
 
-  const maxLength = 30;
+  const maxLength = 40;
   const truncatedProduct =
     product.length > maxLength
       ? product.substring(0, maxLength) + '...'
@@ -33,7 +33,11 @@ export function EventRow({ session, item, index }: EventRowProps) {
     <IndexTable.Row id={item.id} key={item.id} position={index}>
       <IndexTable.Cell>{item.organization.name}</IndexTable.Cell>
       <IndexTable.Cell>{item.name}</IndexTable.Cell>
-      <IndexTable.Cell>{truncatedProduct}</IndexTable.Cell>
+      <IndexTable.Cell>
+        <Text as="span" truncate>
+          {truncatedProduct}
+        </Text>
+      </IndexTable.Cell>
       <IndexTable.Cell>
         {timestampFormat.format(new Date(item.timestamp))}
       </IndexTable.Cell>

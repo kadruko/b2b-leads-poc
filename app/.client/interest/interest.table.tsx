@@ -15,7 +15,7 @@ export function InterestTable({ interests, count }: InterestTableProps) {
         plural: 'Product Interests',
       }}
       itemCount={count}
-      headings={[{ title: 'Product' }, { title: 'Score' }]}
+      headings={[{ title: 'Product Variant' }, { title: 'Score' }]}
       selectable={false}
     >
       {interests.map((interest, index) => (

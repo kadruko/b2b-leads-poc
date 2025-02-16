@@ -62,7 +62,7 @@ export function EventTable({
         headings={[
           { title: 'Organization' },
           { title: 'Event' },
-          { title: 'Product' },
+          { title: 'Product Variant' },
           { title: 'Date' },
         ]}
         pagination={{

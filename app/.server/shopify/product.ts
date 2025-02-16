@@ -8,4 +8,7 @@ export type Product = {
   url: string | null;
   vendor: string;
   media: Media;
+  variantsCount: {
+    count: number;
+  };
 };
