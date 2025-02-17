@@ -1,13 +1,19 @@
+import { Session } from '@prisma/client';
 import { IndexTable } from '@shopify/polaris';
 import { Interest } from '../../.common/interest/interest';
 import { InterestRow } from './interest.row';
 
 type InterestTableProps = {
+  session: Session;
   interests: Interest[];
   count: number;
 };
 
-export function InterestTable({ interests, count }: InterestTableProps) {
+export function InterestTable({
+  session,
+  interests,
+  count,
+}: InterestTableProps) {
   return (
     <IndexTable
       resourceName={{
@@ -19,7 +25,7 @@ export function InterestTable({ interests, count }: InterestTableProps) {
       selectable={false}
     >
       {interests.map((interest, index) => (
-        <InterestRow interest={interest} index={index} />
+        <InterestRow session={session} interest={interest} index={index} />
       ))}
     </IndexTable>
   );

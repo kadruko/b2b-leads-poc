@@ -6,7 +6,7 @@ import { LeadLoader } from '../.server/lead/lead.loader';
 export const loader = LeadLoader;
 
 export default function LeadPage() {
-  const { lead, interestPage } = useLoaderData<typeof loader>();
+  const { session, lead, interestPage } = useLoaderData<typeof loader>();
 
   return (
     <Page
@@ -27,6 +27,7 @@ export default function LeadPage() {
             </Text>
             <Box paddingBlockStart="400">
               <InterestTable
+                session={session as any}
                 interests={interestPage.items as any}
                 count={interestPage.count}
               />

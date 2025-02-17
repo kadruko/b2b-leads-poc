@@ -19,7 +19,7 @@ export const LeadLoader = async ({ request, params }: LoaderFunctionArgs) => {
     loadLead(context.session, organizationId),
     loadInterests(context as unknown as AdminContext, organizationId),
   ]);
-  return { lead, interestPage };
+  return { session: context.session, lead, interestPage };
 };
 
 const loadLead = async ({ shop }: Session, organizationId: string) => {
