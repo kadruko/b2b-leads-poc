@@ -19,7 +19,7 @@ export function InterestRow({ session, interest, index }: InterestTableProps) {
   const shopUrl = `https://admin.shopify.com/store/${session.shop}`;
   let productUrl;
   if (interest.productVariant?.product.id) {
-    `${shopUrl}/products/${interest.productVariant.product.id}`;
+    productUrl = `${shopUrl}/products/${interest.productVariant.product.id}`;
   }
 
   return (
@@ -36,7 +36,7 @@ export function InterestRow({ session, interest, index }: InterestTableProps) {
             )}
           />
           {productUrl ? (
-            <Link url={productUrl}>
+            <Link url={productUrl} removeUnderline>
               {productVariantFormatter.formatText(interest.productVariant)}
             </Link>
           ) : (
