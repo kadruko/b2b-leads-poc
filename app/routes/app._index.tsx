@@ -16,54 +16,31 @@ import {
   Page,
   Text,
 } from '@shopify/polaris';
+import { AdminContext } from '@shopify/shopify-app-remix/server';
+import { WebPixelSettings } from '../.common/web-pixel/web-pixel.settings';
+import { webPixelService } from '../.server/web-pixel/web-pixel.service';
 import { authenticate } from '../shopify.server';
 
 export const loader = async ({ request }: LoaderFunctionArgs) => {
-  const { admin } = await authenticate.admin(request);
+  const adminContext = await authenticate.admin(request);
 
-  let webPixel = null;
-  try {
-    const response = await admin.graphql(
-      `#graphql
-      query {
-        webPixel {
-          id
-        }
-      }
-    `,
-    );
-    const json = await response.json();
-    webPixel = json.data.webPixel;
-  } catch (error) {
-    console.error('Error getting webPixel:', error);
-  }
+  const webPixel = await webPixelService.findOne(
+    adminContext as unknown as AdminContext,
+  );
 
   return { webPixel };
 };
 
 export const action = async ({ request }: ActionFunctionArgs) => {
-  const { admin } = await authenticate.admin(request);
+  const adminContext = await authenticate.admin(request);
 
-  const response = await admin.graphql(
-    `#graphql
-      mutation createWebPixel($settings: JSON!) {
-        webPixelCreate(webPixel: {settings: $settings}) {
-          webPixel {
-            id
-          }
-        }
-      }
-    `,
-    {
-      variables: {
-        settings: {
-          apiURL: process.env.SHOPIFY_APP_URL,
-        },
-      },
-    },
+  const webPixelSettings: WebPixelSettings = {
+    apiURL: process.env.SHOPIFY_APP_URL!,
+  };
+  const webPixel = await webPixelService.create(
+    adminContext as unknown as AdminContext,
+    webPixelSettings,
   );
-  const json = await response.json();
-  const webPixel = json.data.webPixel;
 
   return { webPixel };
 };
